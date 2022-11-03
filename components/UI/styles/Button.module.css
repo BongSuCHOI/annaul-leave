@@ -1,0 +1,30 @@
+.btn {
+	display: block;
+	height: 45px;
+	padding: 0 25px;
+	font-size: 18px;
+	border-radius: 0.3rem;
+	color: #fff;
+	border: none;
+	transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out;
+	background-color: #0d6efd;
+}
+
+.btn:hover {
+	background-color: #0b5ed7;
+	border-color: #0a58ca;
+}
+
+.btn.red {
+	height: 35px;
+	background-color: #dc3545;
+}
+
+.btn.red:hover {
+	background-color: #c12837;
+	border-color: #a3212e;
+}
+
+.btn.center {
+	margin: 0 auto;
+}

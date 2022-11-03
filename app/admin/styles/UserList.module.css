@@ -1,0 +1,21 @@
+.listTable {
+	width: 100%;
+}
+
+.thead {
+	height: 40px;
+	color: #555;
+	background: #f0f4f7;
+	border-bottom: 1px solid #e5e5e5;
+}
+
+.list {
+	height: 60px;
+	text-align: center;
+	border-bottom: 1px solid #e5e5e5;
+}
+
+.thead th,
+.list td {
+	vertical-align: middle;
+}
