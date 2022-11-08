@@ -1,6 +1,6 @@
 'use strict';
 const { Model } = require('sequelize');
-class users extends Model {
+class vacations extends Model {
 	/**
 	 * Helper method for defining associations.
 	 * This method is not a part of Sequelize lifecycle.
@@ -9,42 +9,33 @@ class users extends Model {
 	static init(sequelize, DataTypes) {
 		return super.init(
 			{
-				role: {
-					type: DataTypes.INTEGER,
-					defaultValue: 0,
-				},
-				user_id: {
+				reason: {
 					type: DataTypes.STRING,
+				},
+				start: {
+					type: DataTypes.DATE,
 					allowNull: false,
 				},
-				user_pw: {
-					type: DataTypes.STRING,
-					allowNull: false,
-				},
-				user_name: {
-					type: DataTypes.STRING,
-					allowNull: false,
-				},
-				startDate: {
+				end: {
 					type: DataTypes.DATE,
 					allowNull: false,
 				},
 			},
 			{
 				sequelize,
-				modelName: 'users',
+				modelName: 'vacations',
 			}
 		);
 	}
 
-	// 모델 관계성 정의
 	static associate(models) {
-		// vacation 테이블 안에 userId 외래키 컬럼 추가
-		this.hasMany(models.vacations, {
+		// vacations 테이블 안에 userId 외래키 컬럼 추가
+		this.belongsTo(models.users, {
 			foreignKey: 'user_id',
 			sourceKey: 'id',
+			onDelete: 'CASCADE',
 		});
 	}
 }
 
-module.exports = users;
+module.exports = vacations;
