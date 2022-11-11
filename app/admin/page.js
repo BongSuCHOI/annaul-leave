@@ -1,33 +1,23 @@
-'use client';
-
-import { useState } from 'react';
-import styles from './styles/page.module.css';
-import Title from '../../components/UI/Title';
-import Button from '../../components/UI/Button';
-import UserRegistrationForm from './UserRegistrationForm';
+import AdminHeader from './AdminHeader';
 import UserList from './UserList';
 
-export default function AdminHome() {
-	const [isOpenModal, setIsOpenModal] = useState(false);
-	const [userDatas, setUserDatas] = useState([]);
+const prefetchUsers = async () => {
+	const res = await fetch('http://10.10.10.147:3000/api/user');
 
-	const ModalOpenHandler = () => {
-		setIsOpenModal(true);
-	};
+	if (!res.ok) throw new Error('Error!');
 
-	const registerHandler = (datas) => {
-		setUserDatas((prevState) => [...prevState, datas]);
-		setIsOpenModal(false);
-	};
+	const data = await res.json();
+
+	return data;
+};
+
+export default async function AdminPage() {
+	const usersData = await prefetchUsers();
 
 	return (
 		<div className="admin-wrap">
-			<div className={styles.titleBox}>
-				<Title text="유저 리스트" />
-				<Button text="신규 등록" onClick={ModalOpenHandler} />
-				{isOpenModal && <UserRegistrationForm onRegister={registerHandler} />}
-			</div>
-			<UserList userDatas={userDatas} />
+			<AdminHeader />
+			<UserList prefetchUsers={usersData} />
 		</div>
 	);
 }
