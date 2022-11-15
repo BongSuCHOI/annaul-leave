@@ -15,6 +15,7 @@ export default forwardRef(function Input(props, forwardedRef) {
 				type={props.type}
 				placeholder={props.placeholder}
 				id={props.id}
+				defaultValue={props.defaultValue} // update 테스트용 속성
 			/>
 		</div>
 	);
