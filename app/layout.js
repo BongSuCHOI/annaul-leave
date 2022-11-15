@@ -1,6 +1,6 @@
 import './styles/reset.css';
 import GlobalProvider from '../store/GlobalProvider';
-import ReactQueryWrapper from './ReactQueryWrapper';
+import Providers from './Providers';
 
 export default function RootLayout({ children }) {
 	return (
@@ -9,9 +9,9 @@ export default function RootLayout({ children }) {
 				<title>연차 캘린더</title>
 			</head>
 			<body>
-				<ReactQueryWrapper>
+				<Providers>
 					<GlobalProvider>{children}</GlobalProvider>
-				</ReactQueryWrapper>
+				</Providers>
 			</body>
 		</html>
 	);

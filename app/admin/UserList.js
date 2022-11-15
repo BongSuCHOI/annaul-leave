@@ -3,24 +3,29 @@
 import styles from './styles/UserList.module.css';
 import Button from '../../components/UI/Button';
 import { calcPeriod, calcTotalVacation } from '../../util/calculation';
-import { useGetAllUserInfo, useDeleteUser } from '../../util/basicFetch';
+import { useGetAllUser, useDeleteUser } from '../../lib/db_controller';
 
 export default function UserList({ prefetchUsers }) {
-	const { data } = useGetAllUserInfo(prefetchUsers);
-	const { mutate: deleteUser } = useDeleteUser();
-	const usersData = data?.filter((d) => d.role === 0);
+	const { mutateAsync: deleteUser } = useDeleteUser();
+	const { data } = useGetAllUser(prefetchUsers);
+	const usersData = data
+		?.filter((d) => d.role === 0)
+		.sort((a, b) => new Date(a.createdAt) - new Date(b.createdAt));
 
 	const deleteUserHandler = async (pk) => {
 		const isConfirm = confirm('삭제하시겠습니까?');
 		if (isConfirm) {
-			deleteUser({ pk });
+			const result = deleteUser({ pk });
+			if (result) {
+				alert('삭제되었습니다.');
+			}
 		}
 	};
 
 	const list =
 		usersData &&
 		usersData.map((user) => {
-			const { id, user_name, user_id, startDate } = user;
+			const { id, user_name, user_id, startDate, vacations } = user;
 			const { diffYear, employmentPeriodText } = calcPeriod(startDate);
 			const totalVacation = calcTotalVacation(diffYear);
 
@@ -31,8 +36,8 @@ export default function UserList({ prefetchUsers }) {
 					<td>{startDate?.slice(0, 10)}</td>
 					<td>{employmentPeriodText}</td>
 					<td>{totalVacation}</td>
-					<td>2</td>
-					<td>7</td>
+					<td>{vacations.length}</td>
+					<td>{totalVacation - vacations.length}</td>
 					<td>
 						<Button
 							text="삭제"

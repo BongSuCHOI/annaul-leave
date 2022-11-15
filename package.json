@@ -10,9 +10,11 @@
 	},
 	"dependencies": {
 		"@tanstack/react-query": "^4.14.5",
+		"bcryptjs": "^2.4.3",
 		"date-fns": "^2.29.3",
 		"mysql2": "^2.3.3",
 		"next": "^13.0.3",
+		"next-auth": "^4.16.4",
 		"react": "^18.2.0",
 		"react-dom": "^18.2.0",
 		"sequelize": "^6.25.3",

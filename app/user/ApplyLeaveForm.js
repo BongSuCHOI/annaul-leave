@@ -1,7 +1,6 @@
 'use client';
 
-import { useRef, useContext } from 'react';
-import GlobalContext from '../../store/global-context';
+import { useRef } from 'react';
 import styles from './styles/ApplyLeaveForm.module.css';
 import Modal from '../../components/UI/Modal';
 import Input from '../../components/UI/Input';
@@ -9,7 +8,6 @@ import Button from '../../components/UI/Button';
 import simpleVaildate from '../../util/simpleVaildate';
 
 export default function ApplyLeaveForm(props) {
-	const ctx = useContext(GlobalContext);
 	const reasonRef = useRef();
 	const leaveStartRef = useRef();
 	const leaveEndRef = useRef();
@@ -24,8 +22,8 @@ export default function ApplyLeaveForm(props) {
 		const validLeaveEnd = simpleVaildate(leaveEnd);
 
 		if (validReason && validLeaveStart && validLeaveEnd) {
-			props.onModalClose();
-			ctx.addLeave({ reason, leaveStart, leaveEnd });
+			props.onRegister({ reason, leaveStart, leaveEnd });
+			// ctx.addLeave({ reason, leaveStart, leaveEnd });
 		} else {
 			alert('정보를 모두 입력해주세요.');
 		}

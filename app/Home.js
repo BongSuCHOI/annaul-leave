@@ -2,29 +2,52 @@
 
 import { useRouter } from 'next/navigation';
 import { useRef } from 'react';
+import { signIn, useSession } from 'next-auth/react';
 import styles from './styles/rootPage.module.css';
 import Title from '../components/UI/Title';
 import Input from '../components/UI/Input';
 import Button from '../components/UI/Button';
-import { useGetUserInfo } from '../util/basicFetch';
+import simpleVaildate from '../util/simpleVaildate';
 
 export default function Home() {
 	const idRef = useRef();
 	const pwRef = useRef();
 	const router = useRouter();
-	const { mutateAsync: getUserInfo } = useGetUserInfo();
+	// const { data: session, status } = useSession();
 
 	const submitHandler = async (e) => {
 		e.preventDefault();
 		const id = idRef.current.value;
 		const pw = pwRef.current.value;
-		const userInfo = await getUserInfo({ id, pw });
+		const validId = simpleVaildate(id);
+		const validPw = simpleVaildate(pw);
 
-		if (!userInfo) {
-			// alert('로그인 인증로직 개발 필요');
-			alert('아이디 혹은 비밀번호를 찾을 수 없습니다.');
-		} else if (userInfo.role === 1) {
-			router.push('./admin');
+		if (validId && validPw) {
+			const login = await signIn('credentials', {
+				user_id: id,
+				user_pw: pw,
+				redirect: false,
+			});
+
+			if (!login.error && login.ok) {
+				// role 가지고 라우트 해주는 로직 필요
+				// 우선은 id 가지고 admin/user로 뿌려줌
+				// if (role === 1) {
+				// 	router.push('./admin');
+				// } else {
+				// 	router.push(`./user/${id}`);
+				// }
+				if (id === 'admin') {
+					router.push('./admin');
+				} else {
+					router.push(`./user/${id}`);
+				}
+			} else {
+				alert('아이디 혹은 비밀번호를 찾을 수 없습니다.');
+				console.log(`ERROR: ${login.error}`);
+			}
+		} else {
+			alert('정보를 모두 입력해주세요.');
 		}
 	};
 
