@@ -1,4 +1,4 @@
-const db = require('../../../db/models');
+const db = require('@db/models');
 const { v4: uuidv4 } = require('uuid');
 
 export default async function handler(req, res) {

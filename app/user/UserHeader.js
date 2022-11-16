@@ -2,12 +2,12 @@
 
 import { useState } from 'react';
 import { signOut, useSession } from 'next-auth/react';
-import styles from './styles/page.module.css';
-import Title from '../../components/UI/Title';
-import Button from '../../components/UI/Button';
-import ApplyLeaveForm from './ApplyLeaveForm';
-import { calcPeriod, calcTotalVacation } from '../../util/calculation';
-import { useCreateVacation } from '../../lib/db_controller';
+import styles from '@app/user/styles/page.module.css';
+import Title from '@components/UI/Title';
+import Button from '@components/UI/Button';
+import ApplyLeaveForm from '@app/user/ApplyLeaveForm';
+import { calcPeriod, calcTotalVacation } from '@util/calculation';
+import { useCreateVacation } from '@lib/db_controller';
 
 export default function UserHeader({ userData }) {
 	const [isOpenModal, setIsOpenModal] = useState(false);

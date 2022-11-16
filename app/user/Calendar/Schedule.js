@@ -1,10 +1,10 @@
 'use client';
 
-import styles from '../styles/Calendar.module.css';
+import styles from '@app/user/Calendar/styles/Calendar.module.css';
 import { useState } from 'react';
 import { isSameDay, parseISO, differenceInCalendarDays } from 'date-fns';
-import { useDeleteVacation, useUpdateVacation } from '../../../lib/db_controller';
-import EditLeaveForm from './EditLeaveForm';
+import { useDeleteVacation, useUpdateVacation } from '@lib/db_controller';
+import EditLeaveForm from '@app/user/Calendar/EditLeaveForm';
 
 export default function Schedule({ vacationData, day }) {
 	if (vacationData.length === 0) return;

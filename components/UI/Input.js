@@ -1,5 +1,5 @@
 import { forwardRef } from 'react';
-import styles from './styles/Input.module.css';
+import styles from '@components/UI/styles/Input.module.css';
 
 export default forwardRef(function Input(props, forwardedRef) {
 	const noMarginB = props?.noMarginB ? styles.nomarginB : '';

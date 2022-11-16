@@ -1,12 +1,12 @@
 'use client';
 
 import { useRef } from 'react';
-import styles from './styles/UserRegistrationForm.module.css';
-import Modal from '../../components/UI/Modal';
-import Input from '../../components/UI/Input';
-import Button from '../../components/UI/Button';
-import simpleVaildate from '../../util/simpleVaildate';
-import { hashPassword } from '../../lib/auth';
+import styles from '@app/admin/styles/UserRegistrationForm.module.css';
+import Modal from '@components/UI/Modal';
+import Input from '@components/UI/Input';
+import Button from '@components/UI/Button';
+import simpleVaildate from '@util/simpleVaildate';
+import { hashPassword } from '@lib/auth';
 
 export default function UserRegistrationForm(props) {
 	const nameRef = useRef();

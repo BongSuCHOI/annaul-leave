@@ -1,4 +1,3 @@
-import styles from '../styles/Calendar.module.css';
 import {
 	format,
 	startOfMonth,
@@ -9,7 +8,8 @@ import {
 	isToday,
 	addDays,
 } from 'date-fns';
-import Schedule from './Schedule';
+import styles from '@app/user/Calendar/styles/Calendar.module.css';
+import Schedule from '@app/user/Calendar/Schedule';
 
 export default function CalendarCells({ currentMonth, vacationData }) {
 	const monthStart = startOfMonth(currentMonth);

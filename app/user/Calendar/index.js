@@ -1,11 +1,11 @@
 'use client';
 
-import styles from '../styles/Calendar.module.css';
 import { useState } from 'react';
 import { addMonths, subMonths } from 'date-fns';
-import CalendarHead from './CalendarHead';
-import CalendarDays from './CalendarDays';
-import CalendarCells from './CalendarCells';
+import styles from '@app/user/Calendar/styles/Calendar.module.css';
+import CalendarHead from '@app/user/Calendar/CalendarHead';
+import CalendarDays from '@app/user/Calendar/CalendarDays';
+import CalendarCells from '@app/user/Calendar/CalendarCells';
 
 export default function Calendar({ vacationData }) {
 	const [currentMonth, setCurrentMonth] = useState(new Date());

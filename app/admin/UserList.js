@@ -1,9 +1,9 @@
 'use client';
 
-import styles from './styles/UserList.module.css';
-import Button from '../../components/UI/Button';
-import { calcPeriod, calcTotalVacation } from '../../util/calculation';
-import { useGetAllUser, useDeleteUser } from '../../lib/db_controller';
+import styles from '@app/admin/styles/UserList.module.css';
+import Button from '@components/UI/Button';
+import { calcPeriod, calcTotalVacation } from '@util/calculation';
+import { useGetAllUser, useDeleteUser } from '@lib/db_controller';
 
 export default function UserList({ prefetchUsers }) {
 	const { mutateAsync: deleteUser } = useDeleteUser();

@@ -1,6 +1,6 @@
-import './styles/reset.css';
-import GlobalProvider from '../store/GlobalProvider';
-import Providers from './Providers';
+import '@app/styles/reset.css';
+import GlobalProvider from '@store/GlobalProvider';
+import Providers from '@app/Providers';
 
 export default function RootLayout({ children }) {
 	return (

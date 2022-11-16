@@ -3,11 +3,11 @@
 import { useRouter } from 'next/navigation';
 import { useRef, useState, useEffect } from 'react';
 import { signIn, useSession } from 'next-auth/react';
-import styles from './styles/rootPage.module.css';
-import Title from '../components/UI/Title';
-import Input from '../components/UI/Input';
-import Button from '../components/UI/Button';
-import simpleVaildate from '../util/simpleVaildate';
+import styles from '@app/styles/rootPage.module.css';
+import Title from '@components/UI/Title';
+import Input from '@components/UI/Input';
+import Button from '@components/UI/Button';
+import simpleVaildate from '@util/simpleVaildate';
 
 export default function Home() {
 	const idRef = useRef();

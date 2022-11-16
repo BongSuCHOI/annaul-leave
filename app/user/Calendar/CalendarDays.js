@@ -1,4 +1,4 @@
-import styles from '../styles/Calendar.module.css';
+import styles from '@app/user/Calendar/styles/Calendar.module.css';
 
 export default function CalendarDays() {
 	const daysArr = ['일', '월', '화', '수', '목', '금', '토'];

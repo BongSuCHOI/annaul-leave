@@ -2,11 +2,11 @@
 
 import { useState } from 'react';
 import { signOut, useSession } from 'next-auth/react';
-import styles from './styles/page.module.css';
-import Title from '../../components/UI/Title';
-import Button from '../../components/UI/Button';
-import UserRegistrationForm from './UserRegistrationForm';
-import { useCreateUser } from '../../lib/db_controller';
+import styles from '@app/admin/styles/page.module.css';
+import Title from '@components/UI/Title';
+import Button from '@components/UI/Button';
+import UserRegistrationForm from '@app/admin/UserRegistrationForm';
+import { useCreateUser } from '@lib/db_controller';
 
 const AdminHeader = () => {
 	const [isOpenModal, setIsOpenModal] = useState(false);
