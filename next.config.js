@@ -4,6 +4,10 @@ const nextConfig = {
 	experimental: {
 		appDir: true,
 	},
+	env: {
+		NEXTAUTH_SECRET: 'mysecretofnextjsnextauth',
+		NEXTAUTH_URL: 'http://10.10.10.147:3000/',
+	},
 };
 
 module.exports = nextConfig;

@@ -2,7 +2,7 @@ import AdminHeader from '@app/admin/AdminHeader';
 import UserList from '@app/admin/UserList';
 
 const prefetchUsers = async () => {
-	const res = await fetch('http://10.10.10.147:3000/api/user');
+	const res = await fetch(`${process.env.NEXTAUTH_URL}api/user`);
 
 	if (!res.ok) throw new Error('Error!');
 

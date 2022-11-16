@@ -13,8 +13,7 @@ export default NextAuth({
 			},
 			async authorize(credentials, req) {
 				const { user_id, user_pw } = credentials;
-
-				const res = await fetch(`http://10.10.10.147:3000/api/user/${user_id}`);
+				const res = await fetch(`${process.env.NEXTAUTH_URL}api/user/${user_id}`);
 				if (!res.ok) throw new Error('Error!');
 				const user = await res.json();
 
@@ -45,5 +44,5 @@ export default NextAuth({
 		signIn: '/',
 		signOut: '/',
 	},
-	secret: process.env.SECRET,
+	secret: process.env.NEXTAUTH_SECRET,
 });
