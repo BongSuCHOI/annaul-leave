@@ -29,7 +29,7 @@ export default NextAuth({
 
 				// 기본적으로 user 객체가 email, name, image 3개만 리턴해줌
 				// jwt에 user로 넘겨준 후 다시 session 의 token으로 넘겨 줌 (jwt > session 실행 순서)
-				return { pk: user.id, role: user.role };
+				return { id: user.user_id, role: user.role };
 			},
 		}),
 	],
@@ -37,8 +37,8 @@ export default NextAuth({
 		async jwt({ token, user }) {
 			return { ...token, ...user };
 		},
-		async session({ token }) {
-			return token;
+		async session({ session, token }) {
+			return { id: token.id, role: token.role, expires: session.expires };
 		},
 	},
 	pages: {

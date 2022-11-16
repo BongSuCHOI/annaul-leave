@@ -1,7 +1,7 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
-import { useRef } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import { signIn, useSession } from 'next-auth/react';
 import styles from './styles/rootPage.module.css';
 import Title from '../components/UI/Title';
@@ -13,7 +13,8 @@ export default function Home() {
 	const idRef = useRef();
 	const pwRef = useRef();
 	const router = useRouter();
-	// const { data: session, status } = useSession();
+	const { data: session, status } = useSession();
+	const [isLogin, setIsLogin] = useState(false);
 
 	const submitHandler = async (e) => {
 		e.preventDefault();
@@ -29,27 +30,26 @@ export default function Home() {
 				redirect: false,
 			});
 
-			if (!login.error && login.ok) {
-				// role 가지고 라우트 해주는 로직 필요
-				// 우선은 id 가지고 admin/user로 뿌려줌
-				// if (role === 1) {
-				// 	router.push('./admin');
-				// } else {
-				// 	router.push(`./user/${id}`);
-				// }
-				if (id === 'admin') {
-					router.push('./admin');
-				} else {
-					router.push(`./user/${id}`);
-				}
+			if (login.error && !login.ok) {
+				alert('아이디 또는 비밀번호를 찾을 수 없습니다.');
+				console.log(`ERROR[CODE ${login.status}] : ${login.error}`);
 			} else {
-				alert('아이디 혹은 비밀번호를 찾을 수 없습니다.');
-				console.log(`ERROR: ${login.error}`);
+				setIsLogin(true);
 			}
 		} else {
 			alert('정보를 모두 입력해주세요.');
 		}
 	};
+
+	useEffect(() => {
+		if (session && status === 'authenticated') {
+			if (session.role === 1) {
+				router.push('./admin');
+			} else {
+				router.push(`./user/${session.id}`);
+			}
+		}
+	}, [isLogin]);
 
 	return (
 		<div className={styles.wrapper}>

@@ -1,7 +1,7 @@
-import Home from './Home';
+import Login from './Login';
 
 const RootPage = () => {
-	return <Home></Home>;
+	return <Login />;
 };
 
 export default RootPage;
