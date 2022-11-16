@@ -1,14 +1,18 @@
 import '@app/styles/reset.css';
 import Providers from '@app/Providers';
+import { headers } from 'next/headers';
+import { getSession } from '@lib/session';
 
-export default function RootLayout({ children }) {
+export default async function RootLayout({ children }) {
+	const session = await getSession(headers().get('cookie') ?? '');
+
 	return (
 		<html>
 			<head>
 				<title>연차 캘린더</title>
 			</head>
 			<body>
-				<Providers>{children}</Providers>
+				<Providers session={session}>{children}</Providers>
 			</body>
 		</html>
 	);
