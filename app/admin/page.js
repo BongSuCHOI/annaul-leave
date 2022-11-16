@@ -1,33 +1,23 @@
-'use client';
+import AdminHeader from '@app/admin/AdminHeader';
+import UserList from '@app/admin/UserList';
 
-import { useState } from 'react';
-import styles from './styles/page.module.css';
-import Title from '../../components/UI/Title';
-import Button from '../../components/UI/Button';
-import UserRegistrationForm from './UserRegistrationForm';
-import UserList from './UserList';
+const prefetchUsers = async () => {
+	const res = await fetch(`${process.env.NEXTAUTH_URL}api/user`);
 
-export default function AdminHome() {
-	const [isOpenModal, setIsOpenModal] = useState(false);
-	const [userDatas, setUserDatas] = useState([]);
+	if (!res.ok) throw new Error('Error!');
 
-	const ModalOpenHandler = () => {
-		setIsOpenModal(true);
-	};
+	const data = await res.json();
 
-	const registerHandler = (datas) => {
-		setUserDatas((prevState) => [...prevState, datas]);
-		setIsOpenModal(false);
-	};
+	return data;
+};
+
+export default async function AdminPage() {
+	const usersData = await prefetchUsers();
 
 	return (
 		<div className="admin-wrap">
-			<div className={styles.titleBox}>
-				<Title text="유저 리스트" />
-				<Button text="신규 등록" onClick={ModalOpenHandler} />
-				{isOpenModal && <UserRegistrationForm onRegister={registerHandler} />}
-			</div>
-			<UserList userDatas={userDatas} />
+			<AdminHeader />
+			<UserList prefetchUsers={usersData} />
 		</div>
 	);
 }

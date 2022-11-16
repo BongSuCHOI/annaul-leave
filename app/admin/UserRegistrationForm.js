@@ -1,11 +1,12 @@
 'use client';
 
 import { useRef } from 'react';
-import styles from './styles/UserRegistrationForm.module.css';
-import Modal from '../../components/UI/Modal';
-import Input from '../../components/UI/Input';
-import Button from '../../components/UI/Button';
-import simpleVaildate from '../../util/simpleVaildate';
+import styles from '@app/admin/styles/UserRegistrationForm.module.css';
+import Modal from '@components/UI/Modal';
+import Input from '@components/UI/Input';
+import Button from '@components/UI/Button';
+import simpleValidate from '@util/simpleValidate';
+import { hashPassword } from '@lib/auth';
 
 export default function UserRegistrationForm(props) {
 	const nameRef = useRef();
@@ -13,20 +14,20 @@ export default function UserRegistrationForm(props) {
 	const pwRef = useRef();
 	const startDateRef = useRef();
 
-	const submitHandler = (e) => {
-		// 유효성검사 로직 필요
+	const submitHandler = async (e) => {
 		e.preventDefault();
 		const name = nameRef.current.value;
 		const id = idRef.current.value;
 		const pw = pwRef.current.value;
 		const startDate = startDateRef.current.value;
-		const validName = simpleVaildate(name);
-		const validId = simpleVaildate(id);
-		const validPw = simpleVaildate(pw);
-		const validStartDate = simpleVaildate(startDate);
+		const validName = simpleValidate(name);
+		const validId = simpleValidate(id);
+		const validPw = simpleValidate(pw);
+		const validStartDate = simpleValidate(startDate);
 
 		if (validName && validId && validPw && validStartDate) {
-			props.onRegister({ name, id, pw, startDate });
+			const hashedPassword = await hashPassword(pw);
+			props.onRegister({ name, id, pw: hashedPassword, startDate, role: 0 });
 		} else {
 			alert('정보를 모두 입력해주세요.');
 		}

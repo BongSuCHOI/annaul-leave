@@ -3,16 +3,23 @@
 	"version": "0.1.0",
 	"private": true,
 	"scripts": {
-		"dev": "next dev --turbo",
+		"dev": "next dev",
 		"build": "next build",
 		"start": "next start",
 		"lint": "next lint"
 	},
 	"dependencies": {
+		"@tanstack/react-query": "^4.14.5",
+		"bcryptjs": "^2.4.3",
 		"date-fns": "^2.29.3",
-		"next": "^13.0.1",
+		"mysql2": "^2.3.3",
+		"next": "^13.0.3",
+		"next-auth": "^4.16.4",
 		"react": "^18.2.0",
-		"react-dom": "^18.2.0"
+		"react-dom": "^18.2.0",
+		"sequelize": "^6.25.3",
+		"sequelize-cli": "^6.5.2",
+		"uuid": "^9.0.0"
 	},
 	"devDependencies": {
 		"eslint": "8.26.0",

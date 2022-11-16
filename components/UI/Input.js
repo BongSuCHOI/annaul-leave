@@ -1,7 +1,5 @@
-'use client';
-
 import { forwardRef } from 'react';
-import styles from './styles/Input.module.css';
+import styles from '@components/UI/styles/Input.module.css';
 
 export default forwardRef(function Input(props, forwardedRef) {
 	const noMarginB = props?.noMarginB ? styles.nomarginB : '';
@@ -17,6 +15,7 @@ export default forwardRef(function Input(props, forwardedRef) {
 				type={props.type}
 				placeholder={props.placeholder}
 				id={props.id}
+				defaultValue={props.defaultValue} // update 테스트용 속성
 			/>
 		</div>
 	);

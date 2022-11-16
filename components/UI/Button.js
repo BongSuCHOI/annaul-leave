@@ -1,4 +1,4 @@
-import styles from './styles/Button.module.css';
+import styles from '@components/UI/styles/Button.module.css';
 
 export default function Button(props) {
 	let classes = styles.btn;
@@ -9,6 +9,10 @@ export default function Button(props) {
 
 	if (props.theme === 'red') {
 		classes += ' ' + styles.red;
+	}
+
+	if (props.type === 'text') {
+		classes += ' ' + styles.text;
 	}
 
 	return (

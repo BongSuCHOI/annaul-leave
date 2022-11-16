@@ -1,44 +1,53 @@
-import styles from './styles/UserList.module.css';
-import Button from '../../components/UI/Button';
+'use client';
 
-const calcPeriod = (startDate) => {
-	const today = new Date();
-	const startDay = new Date(startDate);
-	const diffDate = today.getTime() - startDay.getTime();
-	const diffMonth = Math.floor(Math.abs(diffDate / (1000 * 60 * 60 * 24 * 30)));
-	const diffYear = Math.floor(Math.abs(diffDate / (1000 * 60 * 60 * 24 * 365)));
-	let employmentPeriodText = '';
+import styles from '@app/admin/styles/UserList.module.css';
+import Button from '@components/UI/Button';
+import { calcPeriod, calcTotalVacation } from '@util/calculation';
+import { useGetAllUser, useDeleteUser } from '@lib/db_controller';
 
-	if (diffYear > 0) {
-		employmentPeriodText = `${diffYear}년 ${diffMonth - diffYear * 12}개월`;
-	} else {
-		employmentPeriodText = `${diffMonth}개월`;
-	}
+export default function UserList({ prefetchUsers }) {
+	const { mutateAsync: deleteUser } = useDeleteUser();
+	const { data } = useGetAllUser(prefetchUsers);
 
-	return { diffYear, employmentPeriodText };
-};
+	const usersData = data
+		?.filter((d) => d.role === 0)
+		.sort((a, b) => new Date(a.createdAt) - new Date(b.createdAt));
 
-const calcTotalVacation = (period) => (period === 0 ? 11 : Math.floor((period - 1) / 2 + 15));
+	const deleteUserHandler = async (pk) => {
+		const isConfirm = confirm('삭제하시겠습니까?');
+		if (isConfirm) {
+			const result = deleteUser({ pk });
+			if (result) {
+				alert('삭제되었습니다.');
+			}
+		}
+	};
 
-export default function UserList(props) {
-	const userDatas = props.userDatas;
 	const list =
-		userDatas.length > 0 &&
-		userDatas.map((user) => {
-			const { diffYear, employmentPeriodText } = calcPeriod(user.startDate);
+		usersData &&
+		usersData.map((user) => {
+			const { id, user_name, user_id, startDate, vacations } = user;
+			const { diffYear, employmentPeriodText } = calcPeriod(startDate);
 			const totalVacation = calcTotalVacation(diffYear);
 
 			return (
-				<tr className={styles.list} key={user.id}>
-					<td>1324651321</td>
-					<td>{user.name}</td>
-					<td>{user.id}</td>
-					<td>{user.startDate}</td>
+				<tr className={styles.list} key={id}>
+					<td>{user_name}</td>
+					<td>{user_id}</td>
+					<td>{startDate?.slice(0, 10)}</td>
 					<td>{employmentPeriodText}</td>
 					<td>{totalVacation}</td>
-					<td>7</td>
+					<td>{vacations.length}</td>
+					<td>{totalVacation - vacations.length}</td>
 					<td>
-						<Button text="삭제" isCenter={true} theme="red" />
+						<Button
+							text="삭제"
+							isCenter={true}
+							theme="red"
+							onClick={() => {
+								deleteUserHandler(id);
+							}}
+						/>
 					</td>
 				</tr>
 			);
@@ -58,12 +67,12 @@ export default function UserList(props) {
 			</colgroup>
 			<thead className={styles.thead}>
 				<tr>
-					<th>No</th>
 					<th>이름</th>
 					<th>아이디</th>
 					<th>입사일</th>
 					<th>재직기간</th>
 					<th>총 연차</th>
+					<th>사용 연차</th>
 					<th>남은 연차</th>
 					<th>삭제</th>
 				</tr>
