@@ -6,3 +6,12 @@
 	padding: 20px 40px;
 	border-bottom: 1px solid #dcdcdc;
 }
+
+.titleBox .btnBox {
+	display: flex;
+	align-items: center;
+}
+
+.titleBox .btnBox button:first-child {
+	margin-right: 30px;
+}

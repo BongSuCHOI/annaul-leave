@@ -11,6 +11,10 @@ export default function Button(props) {
 		classes += ' ' + styles.red;
 	}
 
+	if (props.type === 'text') {
+		classes += ' ' + styles.text;
+	}
+
 	return (
 		<button className={classes} onClick={props.onClick}>
 			{props.text}

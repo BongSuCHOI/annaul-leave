@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { signOut, useSession } from 'next-auth/react';
 import styles from './styles/page.module.css';
 import Title from '../../components/UI/Title';
 import Button from '../../components/UI/Button';
@@ -11,6 +12,7 @@ import { useCreateVacation } from '../../lib/db_controller';
 export default function UserHeader({ userData }) {
 	const [isOpenModal, setIsOpenModal] = useState(false);
 	const { mutate: createVacation } = useCreateVacation();
+	const { data: session } = useSession();
 
 	const { id, user_name, startDate, vacations } = userData;
 	const { diffYear, employmentPeriodText } = calcPeriod(startDate);
@@ -27,6 +29,11 @@ export default function UserHeader({ userData }) {
 		setIsOpenModal(false);
 	};
 
+	const logOutHandler = (e) => {
+		e.preventDefault();
+		signOut({ callbackUrl: '/' });
+	};
+
 	return (
 		<div className={styles.titleBox}>
 			<Title text={`${user_name}님`} />
@@ -35,7 +42,10 @@ export default function UserHeader({ userData }) {
 			총연차 : {totalVacation}
 			사용연차 : {useVacation}
 			남은연차 : {remainingVacation}
-			<Button text="연차 신청" onClick={ModalOpenHandler} />
+			<div className={styles.btnBox}>
+				{session && <Button text="로그아웃" type={'text'} onClick={logOutHandler} />}
+				<Button text="연차 신청" onClick={ModalOpenHandler} />
+			</div>
 			{isOpenModal && <ApplyLeaveForm onRegister={registerHandler} />}
 		</div>
 	);
