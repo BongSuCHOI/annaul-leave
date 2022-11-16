@@ -1,18 +1,26 @@
 'use client';
 
 import { useState } from 'react';
-import { dehydrate, Hydrate, QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { SessionProvider } from 'next-auth/react';
 
 const GlobalWrapper = ({ children }) => {
-	const [queryClient] = useState(() => new QueryClient());
-	const dehydratedState = dehydrate(queryClient);
+	const [queryClient] = useState(
+		() =>
+			new QueryClient({
+				defaultOptions: {
+					queries: {
+						refetchOnMount: false,
+						refetchOnReconnect: false,
+						refetchOnWindowFocus: false,
+					},
+				},
+			})
+	);
 
 	return (
 		<SessionProvider>
-			<QueryClientProvider client={queryClient}>
-				<Hydrate state={dehydratedState}>{children}</Hydrate>
-			</QueryClientProvider>
+			<QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
 		</SessionProvider>
 	);
 };

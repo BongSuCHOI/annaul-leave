@@ -7,7 +7,6 @@
 			"@components/*": ["/components/*"],
 			"@util/*": ["/util/*"],
 			"@lib/*": ["/lib/*"],
-			"@store/*": ["/store/*"],
 			"@db/*": ["/db/*"]
 		}
 	}

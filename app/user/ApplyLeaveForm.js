@@ -23,7 +23,6 @@ export default function ApplyLeaveForm(props) {
 
 		if (validReason && validLeaveStart && validLeaveEnd) {
 			props.onRegister({ reason, leaveStart, leaveEnd });
-			// ctx.addLeave({ reason, leaveStart, leaveEnd });
 		} else {
 			alert('정보를 모두 입력해주세요.');
 		}

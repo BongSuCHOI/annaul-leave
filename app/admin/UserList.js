@@ -8,6 +8,7 @@ import { useGetAllUser, useDeleteUser } from '@lib/db_controller';
 export default function UserList({ prefetchUsers }) {
 	const { mutateAsync: deleteUser } = useDeleteUser();
 	const { data } = useGetAllUser(prefetchUsers);
+
 	const usersData = data
 		?.filter((d) => d.role === 0)
 		.sort((a, b) => new Date(a.createdAt) - new Date(b.createdAt));
