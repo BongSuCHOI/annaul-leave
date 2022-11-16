@@ -7,7 +7,7 @@ import styles from '@app/styles/rootPage.module.css';
 import Title from '@components/UI/Title';
 import Input from '@components/UI/Input';
 import Button from '@components/UI/Button';
-import simpleVaildate from '@util/simpleVaildate';
+import simpleValidate from '@util/simpleValidate';
 
 export default function Home() {
 	const idRef = useRef();
@@ -20,8 +20,8 @@ export default function Home() {
 		e.preventDefault();
 		const id = idRef.current.value;
 		const pw = pwRef.current.value;
-		const validId = simpleVaildate(id);
-		const validPw = simpleVaildate(pw);
+		const validId = simpleValidate(id);
+		const validPw = simpleValidate(pw);
 
 		if (validId && validPw) {
 			const login = await signIn('credentials', {

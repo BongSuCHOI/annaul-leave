@@ -10,7 +10,7 @@ import styles from '@app/user/styles/ApplyLeaveForm.module.css';
 import Modal from '@components/UI/Modal';
 import Input from '@components/UI/Input';
 import Button from '@components/UI/Button';
-import simpleVaildate from '@util/simpleVaildate';
+import simpleValidate from '@util/simpleValidate';
 
 export default function EditLeaveForm(props) {
 	const reasonRef = useRef();
@@ -22,9 +22,9 @@ export default function EditLeaveForm(props) {
 		const reason = reasonRef.current.value;
 		const leaveStart = leaveStartRef.current.value;
 		const leaveEnd = leaveEndRef.current.value;
-		const validReason = simpleVaildate(reason);
-		const validLeaveStart = simpleVaildate(leaveStart);
-		const validLeaveEnd = simpleVaildate(leaveEnd);
+		const validReason = simpleValidate(reason);
+		const validLeaveStart = simpleValidate(leaveStart);
+		const validLeaveEnd = simpleValidate(leaveEnd);
 
 		if (validReason && validLeaveStart && validLeaveEnd) {
 			props.onRegister({ reason, leaveStart, leaveEnd, id: props.data.id });

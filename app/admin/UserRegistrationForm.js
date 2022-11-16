@@ -5,7 +5,7 @@ import styles from '@app/admin/styles/UserRegistrationForm.module.css';
 import Modal from '@components/UI/Modal';
 import Input from '@components/UI/Input';
 import Button from '@components/UI/Button';
-import simpleVaildate from '@util/simpleVaildate';
+import simpleValidate from '@util/simpleValidate';
 import { hashPassword } from '@lib/auth';
 
 export default function UserRegistrationForm(props) {
@@ -20,10 +20,10 @@ export default function UserRegistrationForm(props) {
 		const id = idRef.current.value;
 		const pw = pwRef.current.value;
 		const startDate = startDateRef.current.value;
-		const validName = simpleVaildate(name);
-		const validId = simpleVaildate(id);
-		const validPw = simpleVaildate(pw);
-		const validStartDate = simpleVaildate(startDate);
+		const validName = simpleValidate(name);
+		const validId = simpleValidate(id);
+		const validPw = simpleValidate(pw);
+		const validStartDate = simpleValidate(startDate);
 
 		if (validName && validId && validPw && validStartDate) {
 			const hashedPassword = await hashPassword(pw);

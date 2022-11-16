@@ -27,7 +27,7 @@ export default function CalendarCells({ currentMonth, vacationData }) {
 				? styles.disabled
 				: isToday(day)
 				? styles.today
-				: 'vaild';
+				: 'valid';
 
 			const cellContents = (
 				<div key={day} className={`${styles.cell} ${classes}`}>
