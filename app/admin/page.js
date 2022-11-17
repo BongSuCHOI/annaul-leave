@@ -2,7 +2,7 @@ import AdminHeader from '@app/admin/AdminHeader';
 import UserList from '@app/admin/UserList';
 
 const prefetchUsers = async () => {
-	const res = await fetch(`${process.env.NEXTAUTH_URL}api/us2er`);
+	const res = await fetch(`${process.env.NEXTAUTH_URL}api/user`);
 
 	if (!res.ok) throw new Error(`[${res.status}]${res.statusText}`);
 
