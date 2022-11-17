@@ -13,9 +13,10 @@ export default NextAuth({
 			},
 			async authorize(credentials, req) {
 				const { user_id, user_pw } = credentials;
-				const res = await fetch(`${process.env.NEXTAUTH_URL}api/user/${user_id}`);
-				if (!res.ok) throw new Error('Error!');
-				const user = await res.json();
+				// const res = await fetch(`${process.env.NEXTAUTH_URL}api/user/${user_id}`);
+				// if (!res.ok) throw new Error('Error!');
+				// const user = await res.json();
+				const user = { user_pw: '123', user_id: '123', role: 0 };
 
 				// 아이디 없음
 				if (!user) return null;
