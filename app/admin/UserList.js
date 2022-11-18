@@ -3,11 +3,11 @@
 import styles from '@app/admin/styles/UserList.module.css';
 import Button from '@components/UI/Button';
 import { calcPeriod, calcTotalVacation } from '@util/calculation';
-import { useGetAllUser, useDeleteUser } from '@lib/db_controller';
+import { useDBGET, useDBPOST } from '@lib/db_controller';
 
 export default function UserList({ prefetchUsers }) {
-	const { mutateAsync: deleteUser } = useDeleteUser();
-	const { data } = useGetAllUser(prefetchUsers);
+	const { mutateAsync: deleteUser } = useDBPOST('/user/destroy', ['allUser']);
+	const { data } = useDBGET('/user', ['allUser'], prefetchUsers);
 
 	const usersData = data
 		?.filter((d) => d.role === 0)

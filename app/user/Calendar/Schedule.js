@@ -3,16 +3,16 @@
 import styles from '@app/user/Calendar/styles/Calendar.module.css';
 import { useState } from 'react';
 import { isSameDay, parseISO, differenceInCalendarDays } from 'date-fns';
-import { useDeleteVacation, useUpdateVacation } from '@lib/db_controller';
+import { useDBPOST } from '@lib/db_controller';
 import EditLeaveForm from '@app/user/Calendar/EditLeaveForm';
 
 export default function Schedule({ vacationData, day }) {
 	if (vacationData.length === 0) return;
 
-	const { mutate: deleteVacation } = useDeleteVacation();
+	const { mutate: deleteVacation } = useDBPOST('/vacation/destroy', ['user']);
 
 	// 퀵하게 만드느라 update 기능 구현용 코드 - 만들고 정리 해야함
-	const { mutate: updateVacation } = useUpdateVacation();
+	const { mutate: updateVacation } = useDBPOST('/vacation/update', ['user']);
 	const [isOpenModal, setIsOpenModal] = useState(false);
 
 	const deleteVacationHandler = (pk) => {

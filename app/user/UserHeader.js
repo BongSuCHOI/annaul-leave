@@ -7,11 +7,11 @@ import Title from '@components/UI/Title';
 import Button from '@components/UI/Button';
 import ApplyLeaveForm from '@app/user/ApplyLeaveForm';
 import { calcPeriod, calcTotalVacation } from '@util/calculation';
-import { useCreateVacation } from '@lib/db_controller';
+import { useDBPOST } from '@lib/db_controller';
 
 export default function UserHeader({ userData }) {
 	const [isOpenModal, setIsOpenModal] = useState(false);
-	const { mutate: createVacation } = useCreateVacation();
+	const { mutate: createVacation } = useDBPOST('/vacation/create', ['user']);
 	const { data: session } = useSession();
 
 	const { id, user_name, startDate, vacations } = userData;

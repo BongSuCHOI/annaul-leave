@@ -6,11 +6,11 @@ import styles from '@app/admin/styles/page.module.css';
 import Title from '@components/UI/Title';
 import Button from '@components/UI/Button';
 import UserRegistrationForm from '@app/admin/UserRegistrationForm';
-import { useCreateUser } from '@lib/db_controller';
+import { useDBPOST } from '@lib/db_controller';
 
 const AdminHeader = () => {
 	const [isOpenModal, setIsOpenModal] = useState(false);
-	const { mutateAsync: createUser } = useCreateUser();
+	const { mutateAsync: createUser } = useDBPOST('/user', ['allUser']);
 	const { data: session } = useSession();
 
 	const ModalOpenHandler = () => {
