@@ -1,4 +1,4 @@
-import styles from '@components/UI/styles/Button.module.css';
+import styles from '@components/styles/Button.module.css';
 
 export default function Button(props) {
 	let classes = styles.btn;

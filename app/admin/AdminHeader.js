@@ -1,17 +1,13 @@
 'use client';
 
 import { useState } from 'react';
-import { signOut, useSession } from 'next-auth/react';
-import styles from '@app/admin/styles/page.module.css';
-import Title from '@components/UI/Title';
-import Button from '@components/UI/Button';
 import UserRegistrationForm from '@app/admin/UserRegistrationForm';
+import PageHeader from '@components/PageHeader';
 import { useDBPOST } from '@lib/db_controller';
 
 const AdminHeader = () => {
 	const [isOpenModal, setIsOpenModal] = useState(false);
 	const { mutateAsync: createUser } = useDBPOST('/user', ['allUser']);
-	const { data: session } = useSession();
 
 	const ModalOpenHandler = () => {
 		setIsOpenModal(true);
@@ -29,20 +25,15 @@ const AdminHeader = () => {
 		setIsOpenModal(false);
 	};
 
-	const logOutHandler = (e) => {
-		e.preventDefault();
-		signOut({ callbackUrl: '/' });
-	};
-
 	return (
-		<div className={styles.titleBox}>
-			<Title text="관리자 페이지" />
-			<div className={styles.btnBox}>
-				{session && <Button text="로그아웃" type={'text'} onClick={logOutHandler} />}
-				<Button text="신규 등록" onClick={ModalOpenHandler} />
-			</div>
+		<>
+			<PageHeader
+				title_text="관리자 페이지"
+				btn_text="유저 등록"
+				onModalOpen={ModalOpenHandler}
+			/>
 			{isOpenModal && <UserRegistrationForm onRegister={registerHandler} />}
-		</div>
+		</>
 	);
 };
 
