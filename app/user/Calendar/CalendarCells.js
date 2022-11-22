@@ -17,37 +17,34 @@ export default function CalendarCells({ currentMonth, vacationData }) {
 	const startDate = startOfWeek(monthStart);
 	const endDate = endOfWeek(monthEnd);
 
-	const weekRows = [];
 	let days = [];
 	let day = startDate;
 
+	const vacations = vacationData.filter((data) => {
+		const vacationMonth = new Date(data.start).getMonth();
+		const month = currentMonth.getMonth();
+		const isGreaterOrEqual = month - 1 <= vacationMonth;
+		const isLessOrEqual = month + 1 >= vacationMonth;
+		return isGreaterOrEqual && isLessOrEqual;
+	});
+
 	while (day <= endDate) {
-		for (let i = 0; i < 7; i++) {
-			const classes = !isSameMonth(day, monthStart)
-				? styles.disabled
-				: isToday(day)
-				? styles.today
-				: 'valid';
+		const status = !isSameMonth(day, monthStart)
+			? styles.disabled
+			: isToday(day)
+			? styles.today
+			: 'valid';
 
-			const cellContents = (
-				<div key={day} className={`${styles.cell} ${classes}`}>
-					<p>{format(day, 'd')}</p>
-					{<Schedule vacationData={vacationData} day={day} />}
-				</div>
-			);
-
-			days.push(cellContents);
-			day = addDays(day, 1);
-		}
-
-		weekRows.push(
-			<div className={styles.row} key={day}>
-				{days}
+		const cellContents = (
+			<div key={day} className={`${styles.cell} ${status}`}>
+				<p>{format(day, 'd')}</p>
+				{vacationData.length > 0 && <Schedule vacations={vacations} day={day} />}
 			</div>
 		);
 
-		days = [];
+		days.push(cellContents);
+		day = addDays(day, 1);
 	}
 
-	return <div className={styles.body}>{weekRows}</div>;
+	return <div className={styles.body}>{days}</div>;
 }
