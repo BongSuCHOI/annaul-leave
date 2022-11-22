@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import PageHeader from '@components/PageHeader';
-import ApplyLeaveForm from '@app/user/ApplyLeaveForm';
+import LeaveForm from '@app/user/LeaveForm';
 import { calcPeriod, calcTotalVacation } from '@util/calculation';
 import { useDBPOST } from '@lib/db_controller';
 
@@ -43,7 +43,9 @@ export default function UserHeader({ userData }) {
 				onModalOpen={ModalOpenHandler}>
 				{userInfoElem}
 			</PageHeader>
-			{isOpenModal && <ApplyLeaveForm onRegister={registerHandler} />}
+			{isOpenModal && (
+				<LeaveForm onRegister={registerHandler} title="연차 등록" btnText="등록" />
+			)}
 		</>
 	);
 }

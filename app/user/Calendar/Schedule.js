@@ -4,7 +4,7 @@ import styles from '@app/user/Calendar/styles/Calendar.module.css';
 import { useState } from 'react';
 import { isSameDay, parseISO, differenceInCalendarDays } from 'date-fns';
 import { useDBPOST } from '@lib/db_controller';
-import EditLeaveForm from '@app/user/Calendar/EditLeaveForm';
+import LeaveForm from '@app/user/LeaveForm';
 
 export default function Schedule({ vacationData, day }) {
 	if (vacationData.length === 0) return;
@@ -53,8 +53,10 @@ export default function Schedule({ vacationData, day }) {
 						</button>
 					</div>
 					{isOpenModal && (
-						<EditLeaveForm
+						<LeaveForm
 							onRegister={registerHandler}
+							title="연차 수정"
+							btnText="수정"
 							data={{
 								id: data.id,
 								reason: data.reason,

@@ -22,7 +22,11 @@ export default function ApplyLeaveForm(props) {
 		const validLeaveEnd = simpleValidate(leaveEnd);
 
 		if (validReason && validLeaveStart && validLeaveEnd) {
-			props.onRegister({ reason, leaveStart, leaveEnd });
+			if (props.data?.id) {
+				props.onRegister({ reason, leaveStart, leaveEnd, id: props.data.id });
+			} else {
+				props.onRegister({ reason, leaveStart, leaveEnd });
+			}
 		} else {
 			alert('정보를 모두 입력해주세요.');
 		}
@@ -31,12 +35,30 @@ export default function ApplyLeaveForm(props) {
 	return (
 		<Modal>
 			<div className={styles.form}>
-				<p className={styles.title}>연차 신청</p>
+				<p className={styles.title}>{props.title}</p>
 				<form onSubmit={submitHandler}>
-					<Input ref={reasonRef} id="reason" type="text" label="사유" />
-					<Input ref={leaveStartRef} id="leave-start" type="date" label="시작일" />
-					<Input ref={leaveEndRef} id="leave-end" type="date" label="종료일" />
-					<Button text="신청" isCenter={true} />
+					<Input
+						ref={reasonRef}
+						id="reason"
+						type="text"
+						label="사유"
+						defaultValue={props.data?.reason}
+					/>
+					<Input
+						ref={leaveStartRef}
+						id="leave-start"
+						type="date"
+						label="시작일"
+						defaultValue={props.data?.start}
+					/>
+					<Input
+						ref={leaveEndRef}
+						id="leave-end"
+						type="date"
+						label="종료일"
+						defaultValue={props.data?.end}
+					/>
+					<Button text={props.btnText} isCenter={true} />
 				</form>
 			</div>
 		</Modal>

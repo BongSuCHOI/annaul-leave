@@ -1,8 +1,8 @@
 'use client';
 
 import { useState } from 'react';
-import UserRegistrationForm from '@app/admin/UserRegistrationForm';
 import PageHeader from '@components/PageHeader';
+import UserRegistrationForm from '@app/admin/UserRegistrationForm';
 import { useDBPOST } from '@lib/db_controller';
 
 const AdminHeader = () => {
