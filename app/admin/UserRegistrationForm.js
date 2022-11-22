@@ -1,7 +1,7 @@
 'use client';
 
 import { useRef } from 'react';
-import styles from '@app/admin/styles/UserRegistrationForm.module.css';
+import styles from '@components/styles/Modal.module.css';
 import Modal from '@components/UI/Modal';
 import Input from '@components/UI/Input';
 import Button from '@components/UI/Button';
@@ -36,7 +36,10 @@ export default function UserRegistrationForm(props) {
 	return (
 		<Modal>
 			<div className={styles.form}>
-				<p className={styles.title}>신규 유저 등록</p>
+				<div className={styles.titleBox}>
+					<p>신규 유저 등록</p>
+					<button onClick={props.onClose}>X</button>
+				</div>
 				<form onSubmit={submitHandler}>
 					<Input ref={nameRef} id="name" type="text" label="유저 이름" />
 					<Input ref={idRef} id="id" type="text" label="유저 아이디" />

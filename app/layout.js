@@ -13,6 +13,7 @@ export default async function RootLayout({ children }) {
 			</head>
 			<body>
 				<Providers session={session}>{children}</Providers>
+				<div id="modal-root"></div>
 			</body>
 		</html>
 	);

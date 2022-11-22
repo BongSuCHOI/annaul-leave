@@ -26,6 +26,10 @@ export default function Schedule({ vacationData, day }) {
 		setIsOpenModal(true);
 	};
 
+	const ModalCloseHandler = () => {
+		setIsOpenModal(false);
+	};
+
 	const registerHandler = (datas) => {
 		updateVacation({ ...datas });
 		setIsOpenModal(false);
@@ -55,6 +59,7 @@ export default function Schedule({ vacationData, day }) {
 					{isOpenModal && (
 						<LeaveForm
 							onRegister={registerHandler}
+							onClose={ModalCloseHandler}
 							title="연차 수정"
 							btnText="수정"
 							data={{

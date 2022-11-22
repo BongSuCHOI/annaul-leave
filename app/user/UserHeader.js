@@ -20,6 +20,10 @@ export default function UserHeader({ userData }) {
 		setIsOpenModal(true);
 	};
 
+	const ModalCloseHandler = () => {
+		setIsOpenModal(false);
+	};
+
 	const registerHandler = (datas) => {
 		createVacation({ ...datas, id });
 		setIsOpenModal(false);
@@ -44,7 +48,12 @@ export default function UserHeader({ userData }) {
 				{userInfoElem}
 			</PageHeader>
 			{isOpenModal && (
-				<LeaveForm onRegister={registerHandler} title="연차 등록" btnText="등록" />
+				<LeaveForm
+					onRegister={registerHandler}
+					onClose={ModalCloseHandler}
+					title="연차 등록"
+					btnText="등록"
+				/>
 			)}
 		</>
 	);

@@ -1,7 +1,7 @@
 'use client';
 
 import { useRef } from 'react';
-import styles from '@app/user/styles/ApplyLeaveForm.module.css';
+import styles from '@components/styles/Modal.module.css';
 import Modal from '@components/UI/Modal';
 import Input from '@components/UI/Input';
 import Button from '@components/UI/Button';
@@ -35,7 +35,10 @@ export default function ApplyLeaveForm(props) {
 	return (
 		<Modal>
 			<div className={styles.form}>
-				<p className={styles.title}>{props.title}</p>
+				<div className={styles.titleBox}>
+					<p>{props.title}</p>
+					<button onClick={props.onClose}>X</button>
+				</div>
 				<form onSubmit={submitHandler}>
 					<Input
 						ref={reasonRef}

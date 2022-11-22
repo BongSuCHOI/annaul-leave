@@ -13,6 +13,10 @@ const AdminHeader = () => {
 		setIsOpenModal(true);
 	};
 
+	const ModalCloseHandler = () => {
+		setIsOpenModal(false);
+	};
+
 	const registerHandler = async (datas) => {
 		const result = await createUser({ ...datas });
 
@@ -32,7 +36,9 @@ const AdminHeader = () => {
 				btn_text="유저 등록"
 				onModalOpen={ModalOpenHandler}
 			/>
-			{isOpenModal && <UserRegistrationForm onRegister={registerHandler} />}
+			{isOpenModal && (
+				<UserRegistrationForm onRegister={registerHandler} onClose={ModalCloseHandler} />
+			)}
 		</>
 	);
 };
