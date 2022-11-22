@@ -40,6 +40,9 @@ export default NextAuth({
 			return { id: token.id, role: token.role, expires: session.expires };
 		},
 	},
+	session: {
+		maxAge: 60 * 60, // 30 * 24 * 60 * 60 = 30 days (60*60 = 1시간)
+	},
 	pages: {
 		signIn: '/',
 		signOut: '/',
