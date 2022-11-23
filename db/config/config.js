@@ -1,6 +1,6 @@
 'use strict';
 const fs = require('fs');
-// const rdsCa = fs.readFileSync(__dirname + '/rds-ca-2019-root.pem');
+const rdsCa = fs.readFileSync('./db/config/rds-combined-ca-bundle.pem');
 
 module.exports = {
 	development: {
@@ -26,7 +26,7 @@ module.exports = {
 		dialectOptions: {
 			ssl: {
 				rejectUnauthorized: true,
-				ca: 'https://s3.amazonaws.com/rds-downloads/rds-combined-ca-bundle.pem',
+				ca: [rdsCa],
 			},
 		},
 	},
