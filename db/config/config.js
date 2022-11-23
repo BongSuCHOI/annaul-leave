@@ -1,6 +1,4 @@
 'use strict';
-const fs = require('fs');
-const rdsCa = fs.readFileSync('./db/config/rds-combined-ca-bundle.pem');
 
 module.exports = {
 	development: {
@@ -24,10 +22,7 @@ module.exports = {
 		host: process.env.DB_HOST,
 		dialect: 'mysql',
 		dialectOptions: {
-			ssl: {
-				rejectUnauthorized: true,
-				ca: [rdsCa],
-			},
+			ssl: true,
 		},
 	},
 };
