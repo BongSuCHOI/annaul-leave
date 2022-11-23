@@ -6,7 +6,11 @@ const nextConfig = {
 	},
 	env: {
 		NEXTAUTH_SECRET: 'mysecretofnextjsnextauth',
-		NEXTAUTH_URL: 'http://10.10.10.147:3000/',
+		NEXTAUTH_URL: 'http://localhost:3000/',
+		DB_HOST: 'solt-vacation-app.cswefcijtjut.ap-northeast-2.rds.amazonaws.com',
+		DB_USER: 'admin',
+		DB_PASS: 'asd132465798!',
+		DB_NAME: 'annual_db',
 	},
 };
 
