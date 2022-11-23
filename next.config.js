@@ -6,7 +6,7 @@ const nextConfig = {
 	},
 	env: {
 		NEXTAUTH_SECRET: 'mysecretofnextjsnextauth',
-		NEXTAUTH_URL: 'http://localhost:3000/',
+		NEXTAUTH_URL: 'http://10.10.10.147:3000/',
 	},
 };
 
